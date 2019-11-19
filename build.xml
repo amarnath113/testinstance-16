@@ -1,0 +1,27 @@
+<project name="test" default="run">
+
+     <target name="clean">
+      <delete dir="build"/>
+     <echo>java clean task</echo>
+     </target>
+
+     <target name="compile" depends="clean">
+       <echo>java compile task</echo>
+       <mkdir dir="build/classes"/>
+       <javac srcdir="src" destdir="build/classes"/>
+       </target>
+
+          <target name="package" depends="compile"> 
+           <echo>java package task</echo> 
+           <jar basedir="build/classes" destfile="build/jar/helloworld.jar">
+           <manifest>
+           <attribute name="Main-class" value="hello1"/>
+           </manifest>
+           </jar>
+           </target>
+
+       <target name="run" depends="package">
+       <echo>running jar files task</echo>
+       <java jar="build/jar/helloworld.jar" fork="true"/>
+       </target>
+       </project> 
